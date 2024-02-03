@@ -12,7 +12,8 @@ router.get('/:id', userController.show);
 router.post('/', userController.create);
 
 // Route for updating a user
-router.post('/:id', userController.update);
+router.put('/:id', userController.update);
+router.patch('/:id', userController.update)
 
 // Route for deleting a user
 router.delete('/:id', userController.destroy);
