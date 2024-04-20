@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
 const userSchema = new mongoose.Schema({
   id: { type: Number, unique: true,},
@@ -23,15 +23,14 @@ const userSchema = new mongoose.Schema({
   }
 });
 
-// Use a pre-save hook to increment the id before saving
 userSchema.pre('save', async function (next) {
   if (!this.id) {
-    const lastUser = await this.constructor.findOne({}, {}, { sort: { id: -1 } });
-    this.id = lastUser ? lastUser.id + 1 : 1;
+    const lastUser = await this.constructor.findOne({}, {}, { sort: { id: -1 } })
+    this.id = lastUser ? lastUser.id + 1 : 1
   }
-  next();
-});
+  next()
+})
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema)
 
-module.exports = User;
+module.exports = User
