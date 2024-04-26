@@ -1,3 +1,4 @@
+require('dotenv').config()
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const User = require('../../models/userModel')
@@ -13,11 +14,14 @@ const login = async (req, res) => {
 
     if (!isMatch) { return res.status(400).json({ message: 'Invalid email or password' }) }
 
-    const token = jwt.sign({ userId: user._id }, 'yourSecretKey', { expiresIn: '1h' });
-    res.status(200).json({ token });
+    const token = jwt.sign({ userId: user._id }, process.env.SECRET_KEY, { expiresIn: '1h' })
+
+    res.cookie('jwtToken', token, { httpOnly: true })
+
+    res.json({ message: 'Login successful', token: token })
   } catch (error) {
-    console.error('Error logging in:', error);
-    res.status(500).json({ message: 'Internal server error' });
+    console.error('Error logging in:', error)
+    res.status(500).json({ message: 'Internal server error' })
   }
 }
 
