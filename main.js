@@ -6,6 +6,7 @@ const app = express()
 app.use(express.json())
 
 const userRoutes = require('./routes/userRoutes')
+const authRoutes = require('./routes/authRoutes')
 
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
 const db = mongoose.connection
@@ -15,13 +16,13 @@ db.once('open', () => {
 })
 
 app.use('/v1/users', userRoutes)
-const PORT = process.env.PORT || 3000
+app.use('/v1/login', authRoutes)
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('Internal Server Error')
 })
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`)
+app.listen(process.env.PORT || 3000, () => {
+  console.log(`Server is running on http://localhost:${process.env.PORT || 3000}`)
 })
