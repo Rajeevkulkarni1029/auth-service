@@ -1,17 +1,18 @@
 const express = require('express')
+const verifyToken = require('../middleware/verifyToken')
 const router = express.Router()
 const userController = require('../app/controllers/userController')
 
-router.get('/', userController.index)
+router.get('/', verifyToken, userController.index)
 
-router.get('/:id', userController.show)
+router.get('/:id', verifyToken, userController.show)
 
-router.post('/', userController.create)
+router.post('/', verifyToken, userController.create)
 
-router.put('/:id', userController.update)
+router.put('/:id', verifyToken, userController.update)
 
-router.patch('/:id', userController.update)
+router.patch('/:id', verifyToken, userController.update)
 
-router.delete('/:id', userController.destroy)
+router.delete('/:id', verifyToken, userController.destroy)
 
 module.exports = router

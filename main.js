@@ -16,7 +16,7 @@ db.once('open', () => {
 })
 
 app.use('/v1/users', userRoutes)
-app.use('/v1/login', authRoutes)
+app.use('/v1', authRoutes)
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
