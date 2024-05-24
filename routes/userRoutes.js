@@ -1,7 +1,7 @@
 const express = require('express')
 const verifyToken = require('../middleware/verifyToken')
-const router = express.Router()
 const userController = require('../app/controllers/userController')
+const router = express.Router()
 
 router.get('/', verifyToken, userController.index)
 

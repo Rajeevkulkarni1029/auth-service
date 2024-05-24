@@ -25,7 +25,9 @@ const userSchema = new mongoose.Schema({
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,}$/,
       'Password must include at least one lowercase letter, one uppercase letter, one number, one special character, and be at least 8 characters long'
     ]
-  }
+  },
+  twoFactorEnabled: { type: Boolean, default: false },
+  twoFactorSecret: { type: String }
 }, {
   timestamps: {
     createdAt: 'created_at',
