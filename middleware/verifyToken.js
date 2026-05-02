@@ -1,5 +1,5 @@
-require('dotenv').config()
-const jwt = require('jsonwebtoken')
+import 'dotenv/config'
+import jwt from 'jsonwebtoken'
 
 const verifyToken = async (req, res, next) => {
   const token = req?.headers?.cookie?.split('=')[1]
@@ -16,4 +16,4 @@ const verifyToken = async (req, res, next) => {
   }
 }
 
-module.exports = verifyToken
+export default verifyToken
